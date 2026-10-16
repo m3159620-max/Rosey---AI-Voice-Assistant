@@ -1,0 +1,285 @@
+[
+  {
+    "version": "v2.7.5",
+    "build": "2026.10.15.6-a58face0",
+    "date": "October 15, 2026",
+    "time": "01:21 PM IST",
+    "title": "Automated Release & Live Synchronization Update",
+    "badge": "Latest Live 🚀",
+    "channel": "Production Release",
+    "whatsNew": [
+      {
+        "title": "Automated Version Engine (ऑटो-वर्ज़न इंक्रीमेंट)",
+        "description": "कोड में नए बदलाव होते ही सिस्टम स्वतः वर्ज़न को v2.7.5 पर अपडेट करता है।",
+        "icon": "🚀",
+        "tag": "Auto-Build"
+      },
+      {
+        "title": "Clean Minimal UI (क्लीन मेन स्क्रीन)",
+        "description": "मेन स्क्रीन को बिना किसी अनावश्‍यक बैज के क्लीन और फ़ास्ट रखा गया है।",
+        "icon": "✨",
+        "tag": "UI/UX"
+      },
+      {
+        "title": "Instant Live Updates (लाइव अपडेट चेकर)",
+        "description": "Specification में Check for Updates बटन से नए वर्ज़न तुरंत डिटेक्ट और रीलोड होते हैं।",
+        "icon": "🔄",
+        "tag": "Live"
+      }
+    ],
+    "changes": [
+      "Automated version increment to v2.7.5 on code build",
+      "Build timestamp updated to 01:16 PM IST on October 15, 2026",
+      "Content hash generated: a58face0"
+    ]
+  },
+  {
+    "version": "v2.7.4",
+    "build": "2026.10.15.5-10ec91b3",
+    "date": "October 15, 2026",
+    "time": "01:05 PM IST",
+    "title": "Automated Release & Live Synchronization Update",
+    "badge": "Latest Live 🚀",
+    "channel": "Production Release",
+    "whatsNew": [
+      {
+        "title": "Automated Version Engine (ऑटो-वर्ज़न इंक्रीमेंट)",
+        "description": "कोड में नए बदलाव होते ही सिस्टम स्वतः वर्ज़न को v2.7.4 पर अपडेट करता है।",
+        "icon": "🚀",
+        "tag": "Auto-Build"
+      },
+      {
+        "title": "Clean Minimal UI (क्लीन मेन स्क्रीन)",
+        "description": "मेन स्क्रीन को बिना किसी अनावश्‍यक बैज के क्लीन और फ़ास्ट रखा गया है।",
+        "icon": "✨",
+        "tag": "UI/UX"
+      },
+      {
+        "title": "Instant Live Updates (लाइव अपडेट चेकर)",
+        "description": "Specification में Check for Updates बटन से नए वर्ज़न तुरंत डिटेक्ट और रीलोड होते हैं।",
+        "icon": "🔄",
+        "tag": "Live"
+      }
+    ],
+    "changes": [
+      "Automated version increment to v2.7.4 on code build",
+      "Build timestamp updated to 01:04 PM IST on October 15, 2026",
+      "Content hash generated: 10ec91b3"
+    ]
+  },
+  {
+    "version": "v2.7.3",
+    "build": "2026.10.15.4-2c33caec",
+    "date": "October 15, 2026",
+    "time": "12:53 PM IST",
+    "title": "Automated Release & Live Synchronization Update",
+    "badge": "Latest Live 🚀",
+    "channel": "Production Release",
+    "whatsNew": [
+      {
+        "title": "Automated Version Engine (ऑटो-वर्ज़न इंक्रीमेंट)",
+        "description": "कोड में नए बदलाव होते ही सिस्टम स्वतः वर्ज़न को v2.7.3 पर अपडेट करता है।",
+        "icon": "🚀",
+        "tag": "Auto-Build"
+      },
+      {
+        "title": "Clean Minimal UI (क्लीन मेन स्क्रीन)",
+        "description": "मेन स्क्रीन को बिना किसी अनावश्‍यक बैज के क्लीन और फ़ास्ट रखा गया है।",
+        "icon": "✨",
+        "tag": "UI/UX"
+      },
+      {
+        "title": "Instant Live Updates (लाइव अपडेट चेकर)",
+        "description": "Specification में Check for Updates बटन से नए वर्ज़न तुरंत डिटेक्ट और रीलोड होते हैं।",
+        "icon": "🔄",
+        "tag": "Live"
+      }
+    ],
+    "changes": [
+      "Automated version increment to v2.7.3 on code build",
+      "Build timestamp updated to 12:53 PM IST on October 15, 2026",
+      "Content hash generated: 2c33caec"
+    ]
+  },
+  {
+    "version": "v2.7.2",
+    "build": "2026.10.15.3-d4c8ed52",
+    "date": "October 15, 2026",
+    "time": "12:42 PM IST",
+    "title": "Automated Release & Live Synchronization Update",
+    "badge": "Latest Live 🚀",
+    "channel": "Production Release",
+    "whatsNew": [
+      {
+        "title": "Automated Version Engine (ऑटो-वर्ज़न इंक्रीमेंट)",
+        "description": "कोड में नए बदलाव होते ही सिस्टम स्वतः वर्ज़न को v2.7.2 पर अपडेट करता है।",
+        "icon": "🚀",
+        "tag": "Auto-Build"
+      },
+      {
+        "title": "Clean Minimal UI (क्लीन मेन स्क्रीन)",
+        "description": "मेन स्क्रीन को बिना किसी अनावश्‍यक बैज के क्लीन और फ़ास्ट रखा गया है।",
+        "icon": "✨",
+        "tag": "UI/UX"
+      },
+      {
+        "title": "Instant Live Updates (लाइव अपडेट चेकर)",
+        "description": "Specification में Check for Updates बटन से नए वर्ज़न तुरंत डिटेक्ट और रीलोड होते हैं।",
+        "icon": "🔄",
+        "tag": "Live"
+      }
+    ],
+    "changes": [
+      "Automated version increment to v2.7.2 on code build",
+      "Build timestamp updated to 12:41 PM IST on October 15, 2026",
+      "Content hash generated: d4c8ed52"
+    ]
+  },
+  {
+    "version": "v2.7.1",
+    "build": "2026.10.15.2-d0c53744",
+    "date": "October 15, 2026",
+    "time": "12:24 PM IST",
+    "title": "Automated Release & Live Synchronization Update",
+    "badge": "Latest Live 🚀",
+    "channel": "Production Release",
+    "whatsNew": [
+      {
+        "title": "Automated Version Engine (ऑटो-वर्ज़न इंक्रीमेंट)",
+        "description": "कोड में नए बदलाव होते ही सिस्टम स्वतः वर्ज़न को v2.7.1 पर अपडेट करता है।",
+        "icon": "🚀",
+        "tag": "Auto-Build"
+      },
+      {
+        "title": "Clean Minimal UI (क्लीन मेन स्क्रीन)",
+        "description": "मेन स्क्रीन को बिना किसी अनावश्‍यक बैज के क्लीन और फ़ास्ट रखा गया है।",
+        "icon": "✨",
+        "tag": "UI/UX"
+      },
+      {
+        "title": "Instant Live Updates (लाइव अपडेट चेकर)",
+        "description": "Specification में Check for Updates बटन से नए वर्ज़न तुरंत डिटेक्ट और रीलोड होते हैं।",
+        "icon": "🔄",
+        "tag": "Live"
+      }
+    ],
+    "changes": [
+      "Automated version increment to v2.7.1 on code build",
+      "Build timestamp updated to 12:24 PM IST on October 15, 2026",
+      "Content hash generated: d0c53744"
+    ]
+  },
+  {
+    "version": "v2.7.0",
+    "build": "2026.10.04.1-42706153",
+    "date": "October 5, 2026",
+    "time": "12:06 AM IST",
+    "title": "Automated Semantic Versioning & Live Synchronization Engine",
+    "badge": "Latest Live 🚀",
+    "channel": "Production Release",
+    "whatsNew": [
+      {
+        "title": "Automated Semantic Versioning (ऑटो-वर्ज़न सिस्टम)",
+        "description": "कोड में नए बदलाव इंटरनेट पर डिप्लॉय होते ही सिस्टम स्वतः वर्ज़न को इंक्रीमेंट करता है। मैन्युअल नंबरिंग की ज़रूरत खत्म।",
+        "icon": "🚀",
+        "tag": "Auto-Build"
+      },
+      {
+        "title": "Standardized Update Button (Check for Updates)",
+        "description": "कन्फ्यूजिंग 'Re-Check Server' को हटाकर स्टैंडर्ड 'Check for Updates' बटन लगाया गया है।",
+        "icon": "🔄",
+        "tag": "UX"
+      },
+      {
+        "title": "Clean Minimal Screen (क्लीन मेन स्क्रीन)",
+        "description": "मेन स्क्रीन बिना किसी अनावश्‍यक वर्ज़न बैज के पूरी तरह क्लीन और डिस्ट्रैक्शन-फ्री है।",
+        "icon": "✨",
+        "tag": "Design"
+      },
+      {
+        "title": "Instant Live Sync & Reload (तत्काल अपडेट लागू)",
+        "description": "सर्वर पर नया वर्ज़न मिलते ही 'Reload & Apply' से ऐप तुरंत नए कोड के साथ ताज़ा हो जाता है।",
+        "icon": "⚡",
+        "tag": "Sync"
+      }
+    ],
+    "changes": [
+      "Engineered automated semantic version bumper on code change",
+      "Standardized UI button strictly to 'Check for Updates'",
+      "Integrated deterministic content-hash build pipeline",
+      "Fixed hash cyclic dependency for stable releases"
+    ]
+  },
+  {
+    "version": "v2.6.0",
+    "build": "2026.10.04.2-prod",
+    "date": "October 4, 2026",
+    "time": "10:50 PM IST",
+    "title": "Dedicated System Specification Section & Decoupled Personalization",
+    "badge": "Stable",
+    "channel": "Production",
+    "whatsNew": [
+      {
+        "title": "Dedicated Specification Section",
+        "description": "System architecture, audio engine specs and version history isolated into its own dedicated modal.",
+        "icon": "📋",
+        "tag": "Architecture"
+      }
+    ],
+    "changes": [
+      "Removed version details from Personalised Settings modal",
+      "Created dedicated Specification & Version modal",
+      "Added Comprehensive Technical System Specifications overview"
+    ]
+  },
+  {
+    "version": "v2.5.0",
+    "build": "2026.10.04.1-prod",
+    "date": "October 4, 2026",
+    "time": "09:25 PM IST",
+    "title": "Smart Video Sync & Lightning Conversational Flow",
+    "badge": "Stable",
+    "channel": "Production",
+    "whatsNew": [
+      {
+        "title": "Smart Video Playback Sync",
+        "description": "Background video runs strictly when assistant session is active.",
+        "icon": "🎥",
+        "tag": "Media"
+      }
+    ],
+    "changes": [
+      "Smart Background video playback synchronized strictly to assistant active session",
+      "Thinking delay bypassed (thinkingBudget: 0) for zero-wait speech output",
+      "Continuous 16-bit PCM Audio Chunk alignment to eliminate sound distortion"
+    ]
+  },
+  {
+    "version": "v2.4.0",
+    "build": "2026.09.29.3-prod",
+    "date": "September 29, 2026",
+    "time": "07:15 PM IST",
+    "title": "Female Voice Safeguard & Activity Detection Tuning",
+    "badge": "Stable",
+    "channel": "Production",
+    "whatsNew": [],
+    "changes": [
+      "Voice sanitization and persona enforcement",
+      "Activity Handling tuning with 250ms VAD trigger"
+    ]
+  },
+  {
+    "version": "v2.0.0",
+    "build": "2026.09.20.1-prod",
+    "date": "September 20, 2026",
+    "time": "03:40 PM IST",
+    "title": "Gemini Live API Bidirectional Audio & Custom Video Backgrounds",
+    "badge": "Milestone",
+    "channel": "Production",
+    "whatsNew": [],
+    "changes": [
+      "Integration of Gemini 3.8 Live API WebSocket",
+      "Custom video wallpaper upload and loop canvas"
+    ]
+  }
+]
