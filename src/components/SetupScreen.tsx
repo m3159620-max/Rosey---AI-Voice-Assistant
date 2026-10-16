@@ -56,7 +56,10 @@ export default function SetupScreen({ onComplete, onCancel, initialConfig }: Set
   const envApiKey = typeof process !== "undefined" && process.env?.GEMINI_API_KEY ? process.env.GEMINI_API_KEY : "";
   const [apiKey, setApiKey] = useState(initialConfig?.apiKey || envApiKey || "");
   const [userName, setUserName] = useState(initialConfig?.userName || "Rishi");
-  const [assistantName, setAssistantName] = useState(initialConfig?.assistantName || "Rosey");
+  const [assistantName, setAssistantName] = useState(() => {
+    const raw = initialConfig?.assistantName;
+    return raw && raw.toLowerCase() !== "xantrikx" ? raw : "Rosey";
+  });
   const initialVoice = initialConfig?.voiceName === "Aoede" ? "Aoede" : "Kore";
   const [voiceName, setVoiceName] = useState(initialVoice);
   const [systemPrompt, setSystemPrompt] = useState(initialConfig?.systemPrompt || "");

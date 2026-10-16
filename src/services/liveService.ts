@@ -100,6 +100,7 @@ export class LiveSessionManager {
   public onStateChange: (state: AppState) => void = () => {};
   public onMessage: (sender: "user" | "zoya", text: string) => void = () => {};
   public onAudioLevel: (level: number) => void = () => {};
+  public onOutputAudioLevel: (level: number) => void = () => {};
   public onToolExecuted: (result: ToolExecutionResult) => void = () => {};
   public onError: (error: { type: "mic" | "playback" | "connection"; message: string; code?: number; reason?: string }) => void = () => {};
   public onAudioStats: (stats: AudioStats) => void = () => {};
@@ -618,6 +619,7 @@ Weave naturally into your thoughts in your own sweet, casual speaking style.`;
       if (sampleCount === 0) return;
 
       this.lastPeakAmplitude = peakAmplitude;
+      this.onOutputAudioLevel(peakAmplitude);
 
       // 1b. Create the AudioBuffer with sampleRate 24000 (the context may run at 44100/48000, browser resamples)
       const buffer = this.audioContext.createBuffer(1, sampleCount, 24000);
