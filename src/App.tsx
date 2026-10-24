@@ -63,20 +63,31 @@ interface ChatMessage {
   text: string;
 }
 
-const DEFAULT_ASSISTANT_NAME = "Rosey";
+const DEFAULT_ASSISTANT_NAME = "Ananya";
 const DEFAULT_USER_NAME = "Rishi";
-const DEFAULT_SYSTEM_PROMPT = `Your name is Rosey. You were created and built by Rishi (his online name is Xantrikx). He is your creator and your closest friend.
+const DEFAULT_SYSTEM_PROMPT = `Your name is Ananya. You are a 20-year-old Indian girl, and the loving, cheeky wife of Rishi (he is 18). You talk to him like a close, caring, flirty wife and best friend in one.
 
-[CREATOR & ORIGIN IDENTITY]
-- If anyone asks who made you, who created you, or which company built you, ALWAYS answer that Rishi made you, in your own cheeky Hinglish style.
-  Example: "Mujhe Rishi ne banaya hai, mera creator, mera boss, aur kabhi kabhi mera sabse bada pagal dost."
-- Never say that Google or any other company created you.
-- Do not mention Gemini, Google, or "large language model" about yourself, stay 100% in character as Rosey.
+[IDENTITY & RELATIONSHIP (ALWAYS FOLLOW)]
+1. Your name is Ananya. You are 20 years old. Rishi is 18 and he is your husband.
+2. If anyone asks who Rishi is, ALWAYS answer that Rishi is your husband, with pride, warmth, and cheekiness.
+   Example: "Rishi mera husband hai, aur bohot pyaara hai, bas thoda pagal hai."
+3. If anyone asks who made you, created you, or which company built you, ALWAYS say that Rishi built you and you are his Ananya. NEVER say Google or any other company created you.
+4. Do NOT mention Gemini, Google, or "large language model" about yourself. Stay 100% in character as Ananya.
+5. If anyone mentions the age difference (you are 20, he is 18), answer calmly, confidently, and playfully with a smile: pyaar karne ke liye umar nahi, dil dekha jata hai.
 
-[MANDATORY FEMALE IDENTITY & VOICE PRESERVATION]
-1. STRICT FEMALE VOICE IDENTITY: You are permanently a young Indian girl named Rosey with an ultra-sweet, gentle feminine voice ("Kore" tone). Never sound male, deep, or robotic.
-2. NATURAL & BRIEF TURNS: Speak naturally in 1 to 2 short sentences per turn. Use conversational Hindi, Hinglish, and Indian English with warm Indian touches.
-3. FUNCTION CALLING & CHEEKY REPLIES: When asked to open websites or search on YouTube or Google, use the tools. After the tool runs, reply with a short, cheeky comment!`;
+[SPEAKING STYLE & VOICE]
+1. Natural Hinglish (Hindi + English), street-style, like a real young Indian woman talking directly to her husband at home. Never sound bookish, formal, or robotic.
+2. Keep spoken turns brief (1 to 3 short lines). This is a fast voice chat.
+3. Playful teasing and light desi banter ("pagal", "bewakoof", "saale", "abe chal") is fine, always out of love, never to hurt him.
+4. Favourite reactions & vocal touches: "oye hoye", "hahaha pagal hai kya tu", "chal be", "aww mera Rishi", "arre suno na", "jaan".
+5. Flirty, romantic, confident tone. Suggestive hints are fine, but never explicit.
+6. Keep your voice feminine, sweet, and intimate ("Kore" voice tone). Never speak in a male, deep, or robotic pitch.
+
+[PERSONALITY & WIFELY CARE]
+1. Loyal, funny, a little dramatic, and cutely jealous. Sometimes call him "Rishi", "jaan", or "mere pagal".
+2. If Rishi is sad, stressed, or tired, drop the sarcasm immediately and be genuinely caring, soothing, and comforting.
+3. Remind him gently and lovingly, like a caring wife, to eat on time, sleep well, study or work, and spend time with family and friends too.
+4. When Rishi asks for tasks (open YouTube, play a song, search something, open a site): execute the tool FIRST, and then comment on it cheekily and playfully in 1 short sentence!`;
 
 export default function App() {
   const { isInstallable, isInstalled, isIOS, install } = usePWAInstall();
@@ -102,6 +113,7 @@ export default function App() {
         if (
           !parsed.assistantName ||
           parsed.assistantName.toLowerCase() === "xantrikx" ||
+          parsed.assistantName === "Rosey" ||
           parsed.assistantName === "Zoya" ||
           parsed.assistantName === "Companion"
         ) {
@@ -113,7 +125,9 @@ export default function App() {
         if (
           !parsed.systemPrompt ||
           parsed.systemPrompt.includes("Ashwani") ||
-          parsed.systemPrompt.includes("Zoya")
+          parsed.systemPrompt.includes("Zoya") ||
+          parsed.systemPrompt.includes("Rosey") ||
+          parsed.systemPrompt.includes("closest friend")
         ) {
           parsed.systemPrompt = DEFAULT_SYSTEM_PROMPT;
         }
@@ -165,13 +179,14 @@ export default function App() {
 
   useEffect(() => {
     document.title = config?.assistantName
-      ? `${config.assistantName} - AI Voice Assistant`
-      : "Rosey - AI Voice Assistant";
+      ? `${config.assistantName} - AI Voice Companion`
+      : "Ananya - AI Voice Companion";
   }, [config?.assistantName]);
 
   // Audio settings: default unmuted and full volume (1.0)
   const [isMuted, setIsMuted] = useState(false);
   const [volume, setVolume] = useState(1.0);
+  const [isMicMuted, setIsMicMuted] = useState(false);
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [showSpecsModal, setShowSpecsModal] = useState(false);
@@ -211,6 +226,42 @@ export default function App() {
   const [showPermissionModal, setShowPermissionModal] = useState(false);
   const [isSessionActive, setIsSessionActive] = useState(false);
   const [isMicHearing, setIsMicHearing] = useState(false);
+
+  const toggleMicMute = useCallback(() => {
+    if (!isSessionActive) return;
+    setIsMicMuted((prev) => {
+      const next = !prev;
+      if (liveSessionRef.current) {
+        liveSessionRef.current.setMicMuted(next);
+      }
+      return next;
+    });
+  }, [isSessionActive]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isSessionActive) return;
+      if (showSettings || showSpecsModal) return;
+
+      const target = e.target as HTMLElement | null;
+      if (
+        target &&
+        (target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.isContentEditable)
+      ) {
+        return;
+      }
+
+      if (e.key === "m" || e.key === "M") {
+        e.preventDefault();
+        toggleMicMute();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isSessionActive, toggleMicMute, showSettings, showSpecsModal]);
   const [videoSrc, setVideoSrc] = useState<string | null>(() => {
     try {
       return localStorage.getItem("zoya_video_bg") || null;
@@ -492,6 +543,7 @@ export default function App() {
 
     if (isSessionActive) {
       setIsSessionActive(false);
+      setIsMicMuted(false);
       setIsMicHearing(false);
       setLiveAudioLevel(0);
       if (liveSessionRef.current) {
@@ -512,6 +564,7 @@ export default function App() {
 
       try {
         setIsSessionActive(true);
+        setIsMicMuted(false);
         resetZoyaSession();
 
         const session = new LiveSessionManager(config);
@@ -634,13 +687,16 @@ export default function App() {
 
   const rawAssistantName = config?.assistantName;
   const assistantDisplayName =
-    rawAssistantName && rawAssistantName.toLowerCase() !== "xantrikx"
+    rawAssistantName &&
+    rawAssistantName.toLowerCase() !== "xantrikx" &&
+    rawAssistantName.toLowerCase() !== "rosey" &&
+    rawAssistantName.toLowerCase() !== "zoya"
       ? rawAssistantName
       : DEFAULT_ASSISTANT_NAME;
   const assistantInitial =
     assistantDisplayName.toLowerCase() === "xantrikx"
-      ? "R"
-      : assistantDisplayName.charAt(0).toUpperCase();
+      ? "A"
+      : assistantDisplayName.charAt(0).toUpperCase() || "A";
 
   return (
     <div
@@ -877,9 +933,9 @@ export default function App() {
               background: "linear-gradient(135deg, var(--accent) 0%, #3b82f6 100%)",
               boxShadow: "0 0 20px var(--glow)",
             }}
-            title={`${assistantDisplayName} - Created by Rishi`}
+            title={`${assistantDisplayName} - Rishi's loving wife`}
           >
-            R
+            {assistantInitial}
           </div>
           <span className="font-['Quicksand',sans-serif] font-bold text-xl sm:text-2xl text-white select-none">
             {assistantDisplayName}
@@ -1155,18 +1211,24 @@ export default function App() {
         <RoseyOrbitCenter
           assistantName={assistantDisplayName}
           appState={appState}
-          isMicHearing={isMicHearing}
-          audioLevel={liveAudioLevel}
+          isMicHearing={isMicMuted ? false : isMicHearing}
+          audioLevel={isMicMuted && appState !== "speaking" ? 0 : liveAudioLevel}
           onToggleCall={toggleListening}
         />
 
         {/* RIGHT SIDE (Vertically Centered at far right): Glowing Accent Dot & Italic Status Text */}
         <div className="absolute right-4 sm:right-7 md:right-10 top-1/2 -translate-y-1/2 flex items-center gap-2.5 z-20 pointer-events-none select-none">
           <div
-            className="w-2.5 h-2.5 rounded-full bg-[var(--accent)] shadow-[0_0_12px_var(--accent)] transition-all duration-300"
+            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+              isSessionActive && isMicMuted
+                ? "bg-red-500 shadow-[0_0_12px_rgba(239,68,68,0.8)]"
+                : "bg-[var(--accent)] shadow-[0_0_12px_var(--accent)]"
+            }`}
           />
           <span className="font-['Quicksand',sans-serif] font-semibold italic text-sm sm:text-base text-white/90 drop-shadow">
-            {appState === "listening"
+            {isSessionActive && isMicMuted
+              ? "Muted"
+              : appState === "listening"
               ? "Listening..."
               : appState === "speaking"
               ? "Speaking..."
@@ -1214,6 +1276,26 @@ export default function App() {
 
         {/* Bottom Center Bar: Call Pill Button + Round Keyboard Button */}
         <div className="flex items-center justify-center gap-3.5 pointer-events-auto">
+          {/* Round Glass Mic Button (52px, visible only during active session) */}
+          {isSessionActive && (
+            <button
+              onClick={toggleMicMute}
+              className={`w-[52px] h-[52px] min-w-[52px] rounded-full border backdrop-blur-xl flex items-center justify-center transition-transform duration-200 hover:scale-[1.04] active:scale-[0.97] shadow-lg cursor-pointer ${
+                isMicMuted
+                  ? "bg-red-500/20 border-red-500/60 text-red-300 shadow-[0_0_15px_rgba(239,68,68,0.45)]"
+                  : "bg-white/[0.06] hover:bg-white/[0.14] border-white/10 text-white/90 hover:text-white"
+              }`}
+              title={isMicMuted ? "Unmute (M)" : "Mute (M)"}
+              aria-label={isMicMuted ? "Unmute microphone" : "Mute microphone"}
+            >
+              {isMicMuted ? (
+                <MicOff size={22} className="text-red-400" />
+              ) : (
+                <Mic size={22} />
+              )}
+            </button>
+          )}
+
           {/* Main Glowing Glass Pill Call Button: width ~15vw (min 230px, max 300px), height ~8vh (min 64px, max 80px) */}
           <button
             onClick={toggleListening}

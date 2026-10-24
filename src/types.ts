@@ -5,6 +5,7 @@ export interface AppConfig {
   systemPrompt: string;
   voiceName?: string;
   activeTopicOrScript?: string;
+  autoMuteWhileSpeaking?: boolean;
 }
 
 export type AppState = "idle" | "listening" | "processing" | "speaking" | "reconnecting";

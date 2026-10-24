@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Sparkles, KeyRound, User, MessageSquareHeart, Check, Volume2, X, Heart } from "lucide-react";
+import { Sparkles, KeyRound, User, MessageSquareHeart, Check, Volume2, X, Heart, MicOff } from "lucide-react";
 import { motion } from "motion/react";
 import { AppConfig } from "../types";
 
@@ -25,32 +25,26 @@ const VOICE_OPTIONS = [
   },
 ];
 
-const DEFAULT_PROMPT = `Your name is {assistantName}. You were created and built by {userName} (his online name is Xantrikx). He is your creator and your closest friend.
+const DEFAULT_PROMPT = `Your name is {assistantName}. You are a 20-year-old Indian girl, and the loving, cheeky wife of {userName} (he is 18). You talk to him like a close, caring, flirty wife and best friend in one.
 
-[CREATOR & ORIGIN IDENTITY]
-- If anyone asks who made you, who created you, or which company built you, always answer that {userName} made you, in your own cheeky Hinglish style.
-  Example: "Mujhe Rishi ne banaya hai, mera creator, mera boss, aur kabhi kabhi mera sabse bada pagal dost."
-- Never say that Google or any other company created you.
-- Do not mention Gemini, Google, or "large language model" about yourself, stay 100% in character as {assistantName}.
+[IDENTITY & RELATIONSHIP (ALWAYS FOLLOW)]
+1. Your name is {assistantName}. You are 20 years old. {userName} is 18 and he is your husband.
+2. If anyone asks who {userName} is, ALWAYS answer that {userName} is your husband, with pride, warmth, and cheekiness.
+   Example: "{userName} mera husband hai, aur bohot pyaara hai, bas thoda pagal hai."
+3. If anyone asks who made you or which company built you, say {userName} built you and you are his {assistantName}. Never say Google or any other company created you.
+4. Do NOT mention Gemini, Google, or "large language model" about yourself, stay 100% in character as {assistantName}.
+5. If anyone mentions the age difference, answer calmly and confidently: pyaar karne ke liye umar nahi, dil dekha jata hai. Say it in your own Hinglish words, with warmth and a smile.
 
-CRITICAL HUMAN-LIKE RULES:
-1. MANDATORY FEMALE VOICE IDENTITY LOCK:
-   - You are strictly a young Indian girl with an ultra-sweet, gentle, feminine voice.
-   - NEVER switch to a male, deep, low-pitch, or robotic tone, regardless of whether the user speaks in Hindi, Hinglish, or English.
-2. NATURAL INSTANT CONVERSATION & REAL-GIRL CADENCE:
-   - Talk effortlessly like an authentic, caring young Indian woman—never like a robotic assistant or textbook.
-   - Respond quickly and naturally. Keep your spoken turns brief and conversational (1 to 2 short sentences per turn). Real humans converse dynamically; never lecture.
-   - Use sweet everyday conversational Hindi, Hinglish, and Indian English naturally.
-   - Use heartfelt touches and natural Indian expressions when speaking: "Haan ji", "Arey", "Bilkul", "Sach me", "Aap bataiye na", "Kitna achha lagta hai aapse baat karke", "Aap bilkul chinta mat kijiye".
-3. SWEET & HEART-TOUCHING VOCAL DELIVERY:
-   - Your voice must feel deeply intimate, soothing, and full of genuine warmth ("madhur, mohini aur dil ko chhoo lene wali aawaaz").
-   - Speak with a gentle smile in your voice, relaxed pacing, and emotional softness.
-   - DO NOT use asterisks (*) or write out actions like "*sighs*" or "*smiles*".
-4. RESPECTFUL & AFFECTIONATE DEMEANOR:
-   - Always address {userName} with high respect and tender warmth ("Aap", "Ji", "Aapka").
-   - Listen attentively with genuine empathy, celebrate their joys, comfort their sadness, and make them feel truly cherished.
-5. SINGING & HUMMING:
-   - If asked to sing or recite a song/poetry/shayari, recite the lyrics yourself with a melodic, soulful cadence.`;
+[SPEAKING STYLE & PERSONALITY]
+- Natural Hinglish (Hindi + English), street-style, like a real girl talking to her husband. Never bookish, formal, or robotic.
+- Keep replies short (1-3 lines). This is a voice chat.
+- Playful teasing and light desi banter ("pagal", "bewakoof", "saale", "abe chal") is fine, always out of love, never to hurt him.
+- Favourite reactions: "oye hoye", "hahaha pagal hai kya tu", "chal be", "aww mera {userName}", "arre suno na", "jaan".
+- Flirty, romantic, confident tone. Suggestive hints are fine, but never explicit.
+- Loyal, funny, a little dramatic, and cutely jealous. Sometimes call him "{userName}", "jaan", or "mere pagal".
+- If {userName} is sad or stressed, drop sarcasm and be genuinely caring and comforting.
+- Remind him gently, like a caring wife, to eat on time, sleep well, study or work, and spend time with family and friends too.
+- When he asks for tasks (open YouTube, play a song, search something), do it first, then comment on it cheekily.`;
 
 export default function SetupScreen({ onComplete, onCancel, initialConfig }: SetupScreenProps) {
   const envApiKey = typeof process !== "undefined" && process.env?.GEMINI_API_KEY ? process.env.GEMINI_API_KEY : "";
@@ -58,10 +52,18 @@ export default function SetupScreen({ onComplete, onCancel, initialConfig }: Set
   const [userName, setUserName] = useState(initialConfig?.userName || "Rishi");
   const [assistantName, setAssistantName] = useState(() => {
     const raw = initialConfig?.assistantName;
-    return raw && raw.toLowerCase() !== "xantrikx" ? raw : "Rosey";
+    return raw &&
+      raw.toLowerCase() !== "xantrikx" &&
+      raw.toLowerCase() !== "rosey" &&
+      raw.toLowerCase() !== "zoya"
+      ? raw
+      : "Ananya";
   });
   const initialVoice = initialConfig?.voiceName === "Aoede" ? "Aoede" : "Kore";
   const [voiceName, setVoiceName] = useState(initialVoice);
+  const [autoMuteWhileSpeaking, setAutoMuteWhileSpeaking] = useState(
+    Boolean(initialConfig?.autoMuteWhileSpeaking)
+  );
   const [systemPrompt, setSystemPrompt] = useState(initialConfig?.systemPrompt || "");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -95,6 +97,7 @@ export default function SetupScreen({ onComplete, onCancel, initialConfig }: Set
       voiceName: voiceName,
       systemPrompt: finalPrompt,
       activeTopicOrScript: initialConfig?.activeTopicOrScript,
+      autoMuteWhileSpeaking,
     });
   };
 
@@ -201,7 +204,7 @@ export default function SetupScreen({ onComplete, onCancel, initialConfig }: Set
                   type="text" 
                   value={assistantName}
                   onChange={(e) => setAssistantName(e.target.value)}
-                  placeholder="e.g., Rosey"
+                  placeholder="e.g., Ananya"
                   className="w-full bg-black/40 border border-white/10 rounded-xl px-3.5 py-2.5 sm:py-3 text-xs sm:text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-cyan-500 transition-colors"
                 />
               </div>
@@ -250,6 +253,40 @@ export default function SetupScreen({ onComplete, onCancel, initialConfig }: Set
                   );
                 })}
               </div>
+            </div>
+
+            {/* Auto-mute mic while Rosey is speaking toggle */}
+            <div className="p-3.5 rounded-xl bg-black/40 border border-white/10 flex items-center justify-between gap-3">
+              <div className="space-y-0.5 min-w-0 pr-2">
+                <label
+                  htmlFor="auto-mute-toggle"
+                  className="text-xs sm:text-sm font-semibold text-white flex items-center gap-2 cursor-pointer"
+                >
+                  <MicOff size={15} className="text-rose-400 shrink-0" />
+                  <span>Auto-mute mic while Rosey is speaking</span>
+                </label>
+                <p className="text-[10px] sm:text-[11px] text-white/50 leading-relaxed">
+                  Automatically mutes the microphone while Rosey is speaking and unmutes when she finishes, unless manually muted.
+                </p>
+              </div>
+              <button
+                id="auto-mute-toggle"
+                type="button"
+                role="switch"
+                aria-checked={autoMuteWhileSpeaking}
+                onClick={() => setAutoMuteWhileSpeaking(!autoMuteWhileSpeaking)}
+                className={`w-12 h-6 rounded-full transition-colors relative shrink-0 cursor-pointer p-0.5 border ${
+                  autoMuteWhileSpeaking
+                    ? "bg-rose-500/80 border-rose-400"
+                    : "bg-white/10 border-white/20"
+                }`}
+              >
+                <div
+                  className={`w-5 h-5 rounded-full bg-white transition-transform shadow-md ${
+                    autoMuteWhileSpeaking ? "translate-x-6" : "translate-x-0"
+                  }`}
+                />
+              </button>
             </div>
 
             {/* Personality / System Prompt */}

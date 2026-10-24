@@ -128,8 +128,11 @@ export default function RoseyOrbitCenter({
 
   // Clean assistant name
   const cleanName =
-    !assistantName || assistantName.toLowerCase() === "xantrikx"
-      ? "Rosey"
+    !assistantName ||
+    assistantName.toLowerCase() === "xantrikx" ||
+    assistantName.toLowerCase() === "rosey" ||
+    assistantName.toLowerCase() === "zoya"
+      ? "Ananya"
       : assistantName.charAt(0).toUpperCase() + assistantName.slice(1);
 
   // Audio reactivity scale for pill glow
